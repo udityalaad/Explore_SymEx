@@ -1,0 +1,102 @@
+# The MIT License (MIT)
+# Copyright (c) 2016 Arie Gurfinkel
+
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+@@grammar :: WhileLang
+@@eol_comments :: /#[^\r\n]*/
+
+start
+    =
+    stmt_list
+    ;
+
+stmt_list = ';'.{stmt}+;
+
+stmt = skip_stmt   |
+       asgn_stmt   |
+       block_stmt  |
+       if_stmt     |
+       while_stmt  |
+       assert_stmt |
+       assume_stmt |
+       havoc_stmt  |
+       print_state_stmt ;
+       
+asgn_stmt = lhs:name ':=' rhs:aexp ;
+block_stmt = '{' @:stmt_list '}';
+skip_stmt = 'skip';
+print_state_stmt = 'print_state';
+if_stmt = 'if' ~ cond:bexp 'then' then_stmt:stmt ['else' else_stmt:stmt];
+while_stmt = 'while' cond:bexp ['inv' inv:bexp] 'do' body:stmt;
+assert_stmt = 'assert' cond:bexp;
+assume_stmt = 'assume' cond:bexp;
+havoc_stmt = 'havoc' vars:var_list;
+
+var_list = ','.{name}+;
+        
+
+bexp = (op:'or').{args:bterm}+;
+bterm = (op:'and').{args:bfactor}+;
+bfactor = arg:batom | op:'not' ~ arg:batom;
+batom = rexp | bool_const | '(' @:bexp ')';
+
+bool_const = 'true' | 'false';
+rexp = lhs:aexp op:rop ~ rhs:aexp ;
+        
+
+rop = '<=' | '<' | '=' | '>=' | '>'  ;
+
+aexp = addition | subtraction | term;
+addition = lhs:term op:'+' ~ rhs:aexp;
+subtraction = lhs:term op:'-' ~ rhs:aexp;
+term = mult | division | factor;
+mult = lhs:factor op:'*' ~ rhs:term;
+division = lhs:factor op:'/' ~ rhs:term;
+factor = atom | neg_number | '(' @:aexp ')';
+neg_number = '-' ~ @:number;
+
+atom = name | number;
+name
+    =
+    NAME
+    ;
+    
+number
+    =
+    INT
+    ;
+    
+INT
+    =
+    /0[xX][0-9a-fA-F]+|[0-9]+/
+    ;
+
+NAME
+    =
+    /(?!\d)\w+/
+    ;
+
+
+NEWLINE
+    =
+    /[\u000C\r\n]+/ ~
+    ;
+

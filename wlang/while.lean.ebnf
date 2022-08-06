@@ -1,0 +1,213 @@
+@@grammar :: WhileLang
+@@eol_comments :: /#[^\r\n]*/
+
+start
+    =
+    stmt_list
+    ;
+
+
+stmt_list
+    =
+    ';'.{stmt}+
+    ;
+
+
+stmt
+    =
+    | skip_stmt
+    | asgn_stmt
+    | block_stmt
+    | if_stmt
+    | while_stmt
+    | assert_stmt
+    | assume_stmt
+    | havoc_stmt
+    | print_state_stmt
+    ;
+
+
+asgn_stmt
+    =
+    name ':=' aexp
+    ;
+
+
+block_stmt
+    =
+    '{' stmt_list '}'
+    ;
+
+
+skip_stmt
+    =
+    'skip'
+    ;
+
+
+print_state_stmt
+    =
+    'print_state'
+    ;
+
+
+if_stmt
+    =
+    'if' ~ bexp 'then' stmt ['else' stmt]
+    ;
+
+
+while_stmt
+    =
+    'while' bexp ['inv' bexp] 'do' stmt
+    ;
+
+
+assert_stmt
+    =
+    'assert' bexp
+    ;
+
+
+assume_stmt
+    =
+    'assume' bexp
+    ;
+
+
+havoc_stmt
+    =
+    'havoc' var_list
+    ;
+
+
+var_list
+    =
+    ','.{name}+
+    ;
+
+
+bexp
+    =
+    ('or').{bterm}+
+    ;
+
+
+bterm
+    =
+    ('and').{bfactor}+
+    ;
+
+
+bfactor
+    =
+    batom | 'not' ~ batom
+    ;
+
+
+batom
+    =
+    rexp | bool_const | '(' bexp ')'
+    ;
+
+
+bool_const
+    =
+    'true' | 'false'
+    ;
+
+
+rexp
+    =
+    aexp rop ~ aexp
+    ;
+
+
+rop
+    =
+    '<=' | '<' | '=' | '>=' | '>'
+    ;
+
+
+aexp
+    =
+    addition | subtraction | term
+    ;
+
+
+addition
+    =
+    term '+' ~ aexp
+    ;
+
+
+subtraction
+    =
+    term '-' ~ aexp
+    ;
+
+
+term
+    =
+    mult | division | factor
+    ;
+
+
+mult
+    =
+    factor '*' ~ term
+    ;
+
+
+division
+    =
+    factor '/' ~ term
+    ;
+
+
+factor
+    =
+    atom | neg_number | '(' aexp ')'
+    ;
+
+
+neg_number
+    =
+    '-' ~ number
+    ;
+
+
+atom
+    =
+    name | number
+    ;
+
+
+name
+    =
+    NAME
+    ;
+
+
+number
+    =
+    INT
+    ;
+
+
+INT
+    =
+    /0[xX][0-9a-fA-F]+|[0-9]+/
+    ;
+
+
+NAME
+    =
+    /(?!\d)\w+/
+    ;
+
+
+NEWLINE
+    =
+    /[\u000C\r\n]+/ ~
+    ;
