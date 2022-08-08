@@ -44,7 +44,7 @@
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-\institute{University of Waterloo, Waterloo, ON, N2L 3G1, CA\\
+\institute{University of Waterloo, Waterloo, ON, N2L 3G1, Canada\\
 %\url{url}
 }
 
@@ -56,7 +56,7 @@
 
 
 \begin{abstract}
-	Symbolic execution has come a long way since its very introduction. Today, we have many sub-categories of symbolic execution techniques aimed at overcoming the challenges and difficulties associated with Static Symbolic Execution (SSE). In this report, we discuss these challenges and how 4 types of symbolic execution techniques, namely – Static Symbolic Execution (SSE), Selective Symbolic Execution (SeSE), Dynamic Symbolic Execution (DSE) (Breadth-first style, Depth-first style), and Symbolic Backward Execution (SBE) compare against each other. To complement this discussion, we have implemented 3 small execution engines, with WLANG as the artifact, using the same structure we had used for creating a Static Symbolic Execution Engine in one of the assignments. We analyze how the 3 new implementations fare against each other for some sample test cases. In the process, we also discuss the design principles, examples and applications of each of these techniques.
+	Symbolic execution has come a long way since its very introduction. Today, we have many sub-categories of symbolic execution techniques aimed at overcoming the challenges and difficulties associated with Static Symbolic Execution (SSE). In this report, we discuss these challenges and how 4 types of symbolic execution techniques, namely – Static Symbolic Execution (SSE), Selective Symbolic Execution (SeSE), Dynamic Symbolic Execution (DSE) (Breadth-first style, Depth-first style), and Symbolic Backward Execution (SBE) compare against each other. To complement this discussion, we have implemented 3 new small execution engines, with WLANG as the artifact, using the same structure we had used for creating a Static Symbolic Execution Engine in one of the assignments. We analyze how the 3 new implementations fare against each other for some sample test cases and also compare these results with static symbolic execution implementation from the assignment. In the process, we also discuss the design principles, examples and applications of each of these techniques.
 
 	\keywords{Symbolic Execution  \and Static Symbolic Execution \and  Dynamic Symbolic Execution  \and  Selective Symbolic Execution  \and  Symbolic Backward Execution }
 \end{abstract}
@@ -126,7 +126,8 @@ We further discuss the many design principles, associated challenges, search str
 
 
 \section{How Symbolic Execution finds bugs?}
-	As discussed in the introduction, Symbolic Execution traverses feasible paths and generates respective satisfying assignments which can be utilized as test cases. When the test suite containing these cases is run, the bugs that exist in the respective path are triggered and hence get recorded in the test results. \cite{7_UW_SE} These are the bugs that are found as a result of testing performed, after symbolic execution.
+	
+	Symbolic Execution traverses feasible paths and generates respective satisfying assignments which can be utilized as test cases. When the test suite containing these cases is run, the bugs that exist in the respective path are triggered and hence get recorded in the test results. \cite{7_UW_SE} These are the bugs that are found as a result of testing performed, after symbolic execution.
 
 	However, certain bugs can be directly found while we are performing symbolic execution. This requires some extra effort. Some oracles such as assertions are compiled into conditionals such that if the path condition and assertions are together VALID, then there are no bugs. Otherwise, even if there is one case, where the combined boolean formula may not hold; then it can be treated as a potential bug in the program. \cite{7_UW_SE}
 	
@@ -163,7 +164,7 @@ We further discuss the many design principles, associated challenges, search str
 
 
 \section{Common Challenges with Symbolic Execution}
-	Symbolic execution is a very exhaustive process; and even though it produces very good results for the sample programs that we discuss in this report, the same may not hold for programs of bigger size. Following are some of the common challenges faced with all types of symbolic execution techniques, when used with industry and other real-world applications:
+	Symbolic execution is a very exhaustive process; and even though it produces very good results for the sample programs that we discuss in this report, the same may not hold for programs of bigger size. The following are some of the common challenges faced with all types of symbolic execution techniques, when used with industry and other real-world applications:
 
     \vspace{-1mm}
     
@@ -336,7 +337,7 @@ We further discuss the many design principles, associated challenges, search str
 
 		Today, many different execution engines follow a dynamic approach with different search strategies, with Depth-first search being the most commonly used one.\\
 
-		Following are the search strategies that can or are employed in Dynamic Symbolic Execution:
+		The following are the search strategies that can be or are employed in Dynamic Symbolic Execution:
 		\begin{enumerate}
 			\item \textbf{Depth-first Style Dynamic Symbolic Execution}
     
@@ -354,9 +355,9 @@ We further discuss the many design principles, associated challenges, search str
 					
 					\begin{enumerate}
 						\item Get or find concrete environment values.
-						\item Concretely keep executing one of the branches, every time a branch condition is reached. Keep doing so, until either – both the branch conditions are infeasible (with concrete values) or until the leaf node has been reached.
+						\item Concretely keep executing one of the branches, every time a branch condition is reached. \\Keep doing so, until either – both the branch conditions are infeasible (with concrete \\values) or until the leaf node has been reached.
 						\item Check the last visited branch in memory.
-						\item If the other branch condition involves any complex operations, then compute and replace them concretely in the branch condition. Also, concretize all variables involved in performing the complex operations.
+						\item If the other branch condition involves any complex operations, then compute and replace \\them concretely in the branch condition. Also, concretize all variables involved in\\ performing the complex operations.
 						\item Symbolically check if Path-condition (PC) is SATISFIABLE, using an SMT solver.
 						\item If PC is SATIFIABLE, then execute the node, else go to step (c).
 						\item Repeat from step (b), until no more branches are left to be covered.
@@ -419,13 +420,13 @@ We further discuss the many design principles, associated challenges, search str
 					\begin{enumerate}
 						\item Get or find concrete environment values.
 						\item Concretely execute one branch, whichever is feasible with concrete values.
-						\item If the other branch condition involves any complex operations, then compute and replace them concretely in the branch condition. Also, concretize all variables involved in performing the complex operations.
+						\item If the other branch condition involves any complex operations, then compute and replace \\them concretely in the branch condition. Also, concretize all variables involved in\\ performing the complex operations.
 						\item In parallel, symbolically execute the other branch.
 							\begin{itemize}
 								\item Symbolically check if Path-condition (PC) is SATISFIABLE, using an SMT solver.
-								\item If PC is SATIFIABLE, then execute the node, else treat the path as infeasible (hence, not explored any further).
+								\item If PC is SATIFIABLE, then execute the node, else treat the path as infeasible (hence,\\ not explored any further).
 							\end{itemize}
-						\item Repeat steps (b) to (d) for all the feasible paths in memory – and execute them all in parallel
+						\item Repeat steps (b) to (d) for all the feasible paths in memory – and execute them all in\\parallel
 					\end{enumerate}
 				\end{algorithm}
 				~
@@ -463,9 +464,9 @@ We further discuss the many design principles, associated challenges, search str
 				
 				
 				\subsubsection{Example}
-					.
+					~
 					\begin{figure}[H]
-						\includegraphics[width=1.17\textwidth]{DSE_BFS_Example.png}
+						\includegraphics[width=1.08\textwidth]{DSE_BFS_Example.png}
 						\caption{Example - Breadth-first Style Dynamic Symbolic Execution} \label{fig_2}
 					\end{figure}
 		
@@ -625,7 +626,7 @@ We further discuss the many design principles, associated challenges, search str
 		~
 		\vspace{1mm}
 
-		As we can see, Symbolic Backward Execution is completely different technique, compared to the ones we've studied so far, in that they go backwards from Leaf nodes.
+		As we can see, Symbolic Backward Execution is a completely different technique compared to the ones we've studied so far, in that they go backwards from Leaf nodes to one of the entry points of the program.
 			
 			
 		\subsubsection{Drawbacks}
@@ -680,7 +681,7 @@ We further discuss the many design principles, associated challenges, search str
 					~
 
 					\begin{algorithm}[H]
-						\caption{Selective Symbolic Execution (Version 1)  - \textbf{ version1\_selective\_symbolic\_execution (current\_node, curr\_state, selected\_ast\_node, execution\_type))}}  \label{algorithm_6}
+						\caption{Selective Symbolic Execution (Version 1)  -\\ \textbf{ version1\_selective\_symbolic\_execution (current\_node, curr\_state,\\ selected\_ast\_node, execution\_type)}} \label{algorithm_6}
 						
 						\DontPrintSemicolon
 						\SetAlgoLined
@@ -745,7 +746,7 @@ We further discuss the many design principles, associated challenges, search str
 					\vspace{3mm}
 
 					\begin{algorithm}[H]
-						\caption{Selective Symbolic Execution (Version 2)  - \textbf{ version2\_selective\_symbolic\_execution (current\_node, curr\_state, selected\_ast\_node, execution\_type))}}  \label{algorithm_7}
+						\caption{Selective Symbolic Execution (Version 2)  -\\ \textbf{ version2\_selective\_symbolic\_execution (current\_node, curr\_state,\\ selected\_ast\_node, execution\_type)}}  \label{algorithm_7}
 						
 						\DontPrintSemicolon
 						\SetAlgoLined
@@ -825,7 +826,7 @@ We further discuss the many design principles, associated challenges, search str
 				\item \textbf{Version 2:} Refer Fig \ref{fig_5}
 			~\end{enumerate}
 
-			\textbf{Note that:} in both cases - there is a possibility that the selected node may not be reached.
+			\textbf{Note that} in both cases - there is a possibility that the selected node may not be reached.
 
 
 			\begin{figure}[H]
@@ -842,7 +843,7 @@ We further discuss the many design principles, associated challenges, search str
 
 		\vspace{2mm}
 
-		We cover both these aspects in our implementation.
+		We have covered both these aspects in our implementation.
 		
 		\vspace{2mm}
 		
@@ -873,14 +874,11 @@ We further discuss the many design principles, associated challenges, search str
 				\vspace{-2mm}
 				\item \textbf{find\_concrete\_symbolic():}  Finds the branch that can be satisfied with concrete values and assigns the other branch as symbolic.
 
-				\item \textbf{concretely\_perform\_node\_specific\_execution():}  Concretely executes branch that holds under the concrete values.
-					\begin{enumerate}
-						\item If any such path exists, then proceeds with that branch-specific execution.
-					\end{enumerate}
+				\item \textbf{concretely\_perform\_node\_specific\_execution():}  Concretely executes branch that holds under the concrete values. If any such path exists, then proceeds with that branch-specific execution.
 
 
 				\begin{algorithm}[H]
-					\caption{Depth-first style Dynamic Symbolic Execution - \textbf{ dynamic\_symbolic\_execution (current\_node, curr\_state)}}  \label{algorithm_8}
+					\caption{Depth-first style Dynamic Symbolic Execution -\\ \textbf{ dynamic\_symbolic\_execution (current\_node, curr\_state)}}  \label{algorithm_8}
 					
 					\DontPrintSemicolon
 					\SetAlgoLined
@@ -987,7 +985,7 @@ We further discuss the many design principles, associated challenges, search str
 
 
 
-\section{Comparing \& analyzing the 4 implementations with 3 different sample test cases} \label{Comparing and analyzing the 3 implementations with some sample test cases}
+\section{Comparing and analyzing the 4 implementations with 3 different sample test cases} \label{Comparing and analyzing the 3 implementations with some sample test cases}
 	\vspace{-2mm}
 
 	As expected, the time taken by Static Symbolic execution is the maximum of the lot. The freshly implemented techniques (DSE, SeSE-1, SeSE-2) in this project are faster than Static SE which was earlier implemented in Assignment 2. 
@@ -1011,7 +1009,7 @@ We further discuss the many design principles, associated challenges, search str
 	\vspace{-4mm}
 
 	\begin{figure}[H]
-		\includegraphics[width=1.1\textwidth]{Analysis.JPG}
+		\includegraphics[width=1.07\textwidth]{Analysis.JPG}
 		\caption{Analyzing the 4 implementations with some sample test cases} \label{fig_7}
 	\end{figure}
 
