@@ -135,7 +135,7 @@ https://github.com/othneildrew/Best-README-Template -->
 
 <!-- LICENSE -->
 ## License or Author
-  * <b>Authored by:</b> &nbsp; Uditya Laad, University of Waterloo
+  * <b>Authored by:</b> &nbsp; Uditya Laad, Karanjot Singh - University of Waterloo
   * <b>WLang Structure</b> - &nbsp; Provided by Prof. Arie Gurfinkel, University of Waterloo, Waterloo, ON, CA
 
   <p align="right">(<a href="#readme-top">back to top</a>)</p>
