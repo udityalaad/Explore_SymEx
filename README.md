@@ -159,5 +159,21 @@ https://github.com/othneildrew/Best-README-Template -->
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
   * ECE 653 - Assignment 2, Prof. Arie Gurfinkel, Prof. Patrick Lam - University of Waterloo, Waterloo, ON, CA
+  * [Yu LIU*, Xu ZHOUa and Wei-Wei GONGb.: A Survey of Search Strategies in the Dynamic Symbolic Execution](https://www.itm-conferences.org/articles/itmconf/abs/2017/04/itmconf_ita2017_03025/itmconf_ita2017_03025.html)
+  * [ROBERTO BALDONI, EMILIO COPPA, DANIELE CONO D’ELIA, CAMIL DEMETRESCU, and IRENE FINOCCHI, Sapienza University of Rome.: A Survey of Symbolic Execution Techniques](https://arxiv.org/abs/1610.00502)
+  * [Vitaly Chipounov, Vlad Georgescu, Cristian Zamfir, George Candea School of Computer and Communication Sciences ´E cole Polytechnique F´ed´erale de Lausanne (EPFL), Switzerland.: Selective Symbolic Execution](https://infoscience.epfl.ch/record/139393)
+  * [Tutorials Point, Software testing dictionary](https://www.tutorialspoint.com/software_testing_dictionary/symbolic_execution.htm)
+  * [Wikipedia, Symbolic Execution](https://en.wikipedia.org/wiki/Symbolic_execution)
+  * [Microsoft Research, z3](https://www.microsoft.com/en-us/research/project/z3-3/)
+  * [University of Waterloo, ECE 653, Symbolic Execution](https://git.uwaterloo.ca/stqam-1225/pdfs/-/raw/master/W05-SymExec.pdf)
+  * [Patrice Godefroid Nils Klarlund, Koushik Sen.: DART: Directed Automated Random Testing](https://web.eecs.umich.edu/~weimerw/590/reading/p213-godefroid.pdf)
+  * [Koushik Sen, Darko Marinov, Gul Agha.: CUTE: A Concolic Unit Testing Engine for C](https://mir.cs.illinois.edu/marinov/publications/SenETAL05CUTE.pdf)
+  * [Cristian Cadar, Vijay Ganesh, Peter M. Pawlowski, David L. Dill, Dawson R. Engler.: EXE: Automatically Generating Inputs of Death](https://dl.acm.org/doi/10.1145/1455518.1455522)
+  * [KLEE, Github IO](https://klee.github.io/)
+  * [University of Waterloo, ECE 653, Dynamic Symbolic Execution](https://git.uwaterloo.ca/stqam-1225/pdfs/-/raw/master/W06-DSE.pdf)
+  * [Patrice Godefroid, Michael Y. Levin, David Molnar, Microsoft.: SAGE: Whitebox Fuzzing for Security Testing](https://queue.acm.org/detail.cfm?id=2094081)
+  * [Kin-Keung Ma, Khoo Yit Phang, Jeffrey S. Foster, and Michael Hicks: Directed symbolic execution](https://www.cs.umd.edu/~mwh/papers/dse-sas11.pdf)
+  * Majumdar, Rupak, and Koushik Sen. ”Hybrid concolic testing.” 29th International Conference on Software Engineering (ICSE’07). IEEE, 2007.
+  * [Peter Dinges and Gul Agha. 2014. Targeted test input generation using symbolic-concrete backward execution. In Proceedings of the 29th ACM/IEEE International Conference on Automated Software Engineering (ASE’14). 31–36. DOI](http://dx.doi.org/10.1145/2642937.2642951)
 
   <p align="right">(<a href="#readme-top">back to top</a>)</p>
