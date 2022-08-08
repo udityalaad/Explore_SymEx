@@ -91,9 +91,8 @@ https://github.com/othneildrew/Best-README-Template -->
   The program takes a WLang program as input and performs Verification on it.
   1. Create a file with WLang program.
   2. Run the respective engine in python with the path of file (from Part-1) as argument.
-  <br>
 
-  ###### Following files contain the implementaion for repective engines:
+  ###### Following files contain the implementaion for respective engines:
   * Static Symbolic Execution:  <b>'wlang/SSE.py'</b>
   * Dynamic Symbolic Execution:  <b>'wlang/DSE.py'</b>
   * Selective Symbolic Execution Engine - Variant-1 (SeSE-1):  <b>'wlang/SeSE_v1.py'</b>
@@ -108,23 +107,13 @@ https://github.com/othneildrew/Best-README-Template -->
 
     <p align="center"><img src="Read_Me_Content/Comparison/comparison.jpg" alt="Comparsion"></p>
 
-    <br>
-
     * As expected, the time taken by Static Symbolic execution is the maximum of the lot. The freshly implemented techniques (DSE, SeSE-1, SeSE-2) in this project are faster than Static SE which was earlier implemented in Assignment 2.
 
-    <br>
-
     * But, its also quite abvious that we miss out on completeness with the new techniques. Each of DSE, SeSE-1, and SeSE-2 return a lower number of feasible paths than their static counterpart. Another very important aspect that we observe here is that each of the 3 new tehniques can potentially return different number of feasible paths, depending on thier initial concrete values. We had randomized our concrete input for the tests, and hence we see the varying results.
-    
-    <br>
 
     * Also; time taken(SeSE-2) < time taken(SeSE-1) < time taken(DSE) in most cases; except for example-1, where we get SeSE-1 taking the lowest-time, but that may be due to the small size and structure of the program. The same condition holds for number of paths returned by these techniques; i.e.: #paths(SeSE-2) < #paths(SeSE-1) < #paths(DSE).
 
-    <br>
-
     * It maybe noted that for DSE, if we run the test cases, and print the feasible states; then we will observe that concrete branch also has a simplified value for the complex sub-expressions. This is essentially because, any symbolic path further down this branch may again need to be concretized to solve for these complex expressions and that too with the same concrete value that the symbolic path at previous branch was simplififed with (if any). Hence, instead of repeating this procedure, it makes sense to simplify the path for the concrete branch where it first observed that complex expression. This will hold for the concrete split going further and for symbolic split, since we would have had to essentially repeat the same procedure with the same concrete values again, this would also hold for it.
-
-    <br>
 
     ##### Conclusion
     * As we observed through our analysis, we can adopt different techniques of symbolic execution and also in different configurations to tackle the problems associated with Static or Classical symbolic execution, most particular being ’path explosion’ and ’complex operations’.
@@ -134,8 +123,6 @@ https://github.com/othneildrew/Best-README-Template -->
     * While SeSE may be the fastest techniques of the lot, they are not always practical in real-life. DSE is the most widely used technique, as it helps reduce path explosion and saves computing resources utilized by the solver; while also maintaining a relatively higher level of symbolic association.
 
     * Depending on the case and context, a developer or organization may choose to utilize any of these techniques or may even try and come up with thier own version of symbolic execution.
-
-    <br>
   
   * ##### The entire corpus of tested programs can be found in the following files:
     * 'wlang/test_sym.py'
@@ -163,7 +150,7 @@ https://github.com/othneildrew/Best-README-Template -->
   
   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; udityalaad123@gmail.com
 
-  <b>Project Link</b> &nbsp; [https://github.com/udityalaad/VeriCross](https://github.com/udityalaad/VeriCross)
+  <b>Project Link</b> &nbsp; [https://github.com/udityalaad/Explore_SymEx](https://github.com/udityalaad/Explore_SymEx)
 
   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
