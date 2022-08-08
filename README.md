@@ -41,25 +41,25 @@ https://github.com/othneildrew/Best-README-Template -->
   This is a software package that contains implementation for the following four execution engines:
   (Detailed report can be found in <b>'Report.pdf'</b> in the parent directory)
 
-  * ##### Static Symbolic Execution - (SSE)
+  * #### Static Symbolic Execution - (SSE)
       In SSE, the entire Control Flow Graph (CFG) is constructed with symbolic values. Hence, it ensures completeness and soundness, but may lead to path explosion.
 
-  * ##### Depth-first Dynamic Symbolic Execution (DSE)
+  * #### Depth-first Dynamic Symbolic Execution (DSE)
     Symbolic Execution follows Concrete execution:
     1. Get or find concrete environment values.
     2. Concretely keep executing one of the branches, every time a branch condition is reached. Keep doing so, until either – both the branch conditions are infeasible (with concrete values) or until the leaf node has been reached.
     3. Check the last visited branch in memory.
     4. If the other branch condition involves any complex operations, then compute and replace them concretely in the branch condition. Also, concretize all variables involved in performing the complex operations.
     5. Symbolically check if Path-condition (PC) is SATISFIABLE, using an SMT solver.
-    6. If PC is SATIFIABLE, then execute the node, else go to step (3).
-    7. Repeat from step (2), until no more branches are left to be covered.
+    6. If PC is SATIFIABLE, then execute the node, else go to step (iii).
+    7. Repeat from step (ii), until no more branches are left to be covered.
   
-  * ##### Selective Symbolic Execution - Variant 1 (SeSE-1)
+  * #### Selective Symbolic Execution - Variant 1 (SeSE-1)
     1. Take concrete input and module/part of interest from the developer/user.
     2. Run SeSE engine concretely till the module of interest has been encountered.
     3. Once module of interest is encountered, execute the rest of the program symbolically.
 
-  * ##### Selective Symbolic Execution - Variant 2 (SeSE-2)
+  * #### Selective Symbolic Execution - Variant 2 (SeSE-2)
     1. Take concrete input and module/part of interest from the developer/user.
     2. Run SeSE engine concretely till the module of interest has been encountered.
     3. Once module of interest is encountered, execute the entire module of interest symbolically.
@@ -95,8 +95,8 @@ https://github.com/othneildrew/Best-README-Template -->
   ###### Following files contain the implementaion for respective engines:
   * Static Symbolic Execution:  <b>'wlang/SSE.py'</b>
   * Dynamic Symbolic Execution:  <b>'wlang/DSE.py'</b>
-  * Selective Symbolic Execution Engine - Variant-1 (SeSE-1):  <b>'wlang/SeSE_v1.py'</b>
-  * Selective Symbolic Execution Engine - Variant-2 (SeSE-2):  <b>'wlang/SeSE_v2.py'</b>
+  * Selective Symbolic Execution - Variant-1 (SeSE-1):  <b>'wlang/SeSE_v1.py'</b>
+  * Selective Symbolic Execution - Variant-2 (SeSE-2):  <b>'wlang/SeSE_v2.py'</b>
 
   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -118,7 +118,7 @@ https://github.com/othneildrew/Best-README-Template -->
     ##### Conclusion
     * As we observed through our analysis, we can adopt different techniques of symbolic execution and also in different configurations to tackle the problems associated with Static or Classical symbolic execution, most particular being ’path explosion’ and ’complex operations’.
     
-    * The symbolic execution techniques have been listed in Fig-6 in decreasing order of their association with symbolic activity. And hence we observe a lower time, required for symbolic processing, while the no. of feasible paths also decrease; from SSE to DSE to SeSE-1 to SeSE-2.
+    * The symbolic execution techniques have been listed in the above figure in decreasing order of their association with symbolic activity. And hence we observe a lower time, required for symbolic processing, while the no. of feasible paths also decrease; from SSE to DSE to SeSE-1 to SeSE-2.
     
     * While SeSE may be the fastest techniques of the lot, they are not always practical in real-life. DSE is the most widely used technique, as it helps reduce path explosion and saves computing resources utilized by the solver; while also maintaining a relatively higher level of symbolic association.
 
